@@ -19,7 +19,7 @@ Because there is an amazing [plugin](https://github.com/orta/vscode-react-native
 * [React Native](https://facebook.github.io/react-native/)
 * [React](https://facebook.github.io/react/)
  
-Search "Storybook" in `Preferences / Plugins / Browse repositories...`.
+Search for "Storybook" in `Preferences / Plugins / Browse repositories...` or download it by clicking [here](https://plugins.jetbrains.com/plugin/9910-storybook/).
 
 ## Sources
 
