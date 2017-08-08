@@ -162,8 +162,8 @@ class WindowFactory : ToolWindowFactory, SettingsChangeNotifier {
         }
 
         panel.subStatusField.text = when (status) {
-            WAITING_FOR_CONNECTION -> "Please start storybook from commandline!"
-            WAITING_FOR_STORIES -> "Please refresh your [sim|emu]lator!"
+            WAITING_FOR_CONNECTION -> "Please start storybook from command line!"
+            WAITING_FOR_STORIES -> "Please refresh your [simu|emu]lator!"
             READY -> ""
         }
     }
@@ -174,7 +174,7 @@ class WindowFactory : ToolWindowFactory, SettingsChangeNotifier {
         } catch (e: Throwable) {
             if (!showFailedMessage) {
                 showFailedMessage = true
-                notificationManager.error("failed to connect, please check your Storybook settings or start Storybook!")
+                notificationManager.error("failed to connect, please check your settings or start storybook!")
             }
 
             Timer().schedule(timerTask {
