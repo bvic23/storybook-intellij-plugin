@@ -24,7 +24,7 @@ Search "Storybook" in `Preferences / Plugins / Browse repositories...`.
 ## Sources
 
 - [IntelliJ Platform SDK Documentation](http://www.jetbrains.org/intellij/sdk/docs/welcome.html)
-- [React Native Storybook Loader](https://github.com/orta/react-native-storybook-loader)
+- [React Native Storybook](https://github.com/orta/vscode-react-native-storybooks)
 - [Storybook](https://storybook.js.org)
 
 ## License
