@@ -29,3 +29,5 @@
 
 # IntelliJ
 /out/
+
+*.zip
