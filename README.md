@@ -2,6 +2,10 @@
 
 [IntelliJ IDEA](https://www.jetbrains.com/idea/)/[WebStorm](https://www.jetbrains.com/webstorm/) plugin supports [Storybook](https://storybook.js.org) based development in React (Native)
 
+![](https://raw.githubusercontent.com/bvic23/storybook-intellij-plugin/master/demo.gif)
+
+[Youtube](https://youtu.be/tTVrrfPNkYo)
+
 ## Why?
 
 Because there is an amazing [plugin](https://github.com/orta/react-native-storybook-loader) already available by [@orta](https://github.com/orta) for [VSCode](https://code.visualstudio.com) and I wanted to have the same features in WebStorm
