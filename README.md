@@ -4,7 +4,7 @@
 
 ## Why?
 
-Because there is an amazing [plugin](https://github.com/orta/react-native-storybook-loader) already available by (@orta)[https://github.com/orta] for (VSCode)[https://code.visualstudio.com] and I wanted to have the same features in WebStorm
+Because there is an amazing [plugin](https://github.com/orta/react-native-storybook-loader) already available by [@orta](https://github.com/orta) for (VSCode)[https://code.visualstudio.com] and I wanted to have the same features in WebStorm
 
 ## Installation
 
