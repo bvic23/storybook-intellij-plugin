@@ -1,0 +1,27 @@
+<idea-plugin>
+  <id>oorg.bvic23.intellij.plugin.storybook.Storybook</id>
+  <name>Storybook</name>
+  <description>This plugin supports Storybook based development in React (Native).</description>
+  <version>1.0.2</version>
+  <vendor email="bvic23@gmail.com" url="http://twitter.com/bvic23">Viktor Belenyesi</vendor>
+
+  <change-notes><![CDATA[
+     Fix webstorm compatibility.<br>
+    ]]>
+  </change-notes>
+
+  <idea-version since-build="141"/>
+
+  <depends>com.intellij.modules.lang</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationConfigurable instance="org.bvic23.intellij.plugin.storybook.settings.SettingsController"/>
+    <toolWindow id="Storybook"
+                secondary="true"
+                icon="/org/bvic23/intellij/plugin/storybook/plus.png"
+                anchor="left"
+                factoryClass="org.bvic23.intellij.plugin.storybook.WindowFactory"/>
+
+  </extensions>
+
+</idea-plugin>
