@@ -4,7 +4,7 @@
 
 ![](https://raw.githubusercontent.com/bvic23/storybook-intellij-plugin/master/demo.gif)
 
-[Youtube](https://youtu.be/tTVrrfPNkYo)
+[YouTube](https://youtu.be/tTVrrfPNkYo)
 
 ## Why?
 
