@@ -6,8 +6,8 @@
   <vendor email="bvic23@gmail.com" url="http://twitter.com/bvic23">Viktor Belenyesi</vendor>
 
   <change-notes><![CDATA[
-     - Restore filter after refresh<br>
-     - Restore collapsed nodes after refresh<br>
+     - Restore filter after refresh/restart<br>
+     - Restore collapsed nodes after refresh/restart<br>
     ]]>
   </change-notes>
 
