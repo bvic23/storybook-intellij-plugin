@@ -54,6 +54,7 @@ class WindowFactory : ToolWindowFactory, SettingsChangeNotifier {
     }
 
     private fun setupFilter() {
+        panel.filterField.text = settingsManager.filter
         panel.filterField.document.addDocumentListener(object : DocumentListener {
             override fun changedUpdate(e: DocumentEvent) = update()
             override fun removeUpdate(e: DocumentEvent) = update()
@@ -63,6 +64,7 @@ class WindowFactory : ToolWindowFactory, SettingsChangeNotifier {
     }
 
     private fun setupTree() {
+        collapsedPaths.addAll(settingsManager.collapsed)
         panel.storyTree.showsRootHandles = false
         panel.storyTree.isRootVisible = false
         panel.storyTree.addTreeExpansionListener(object: TreeExpansionListener{
@@ -71,6 +73,7 @@ class WindowFactory : ToolWindowFactory, SettingsChangeNotifier {
                 if (event.path.pathCount != 2) return
                 val pathName = event.path.lastPathComponent.toString()
                 collapsedPaths.remove(pathName)
+                updateCollapsedSettings()
             }
 
             override fun treeCollapsed(event: TreeExpansionEvent?) {
@@ -78,6 +81,7 @@ class WindowFactory : ToolWindowFactory, SettingsChangeNotifier {
                 if (event.path.pathCount != 2) return
                 val pathName = event.path.lastPathComponent.toString()
                 collapsedPaths.add(pathName)
+                updateCollapsedSettings()
             }
 
         })
@@ -87,6 +91,10 @@ class WindowFactory : ToolWindowFactory, SettingsChangeNotifier {
             val selectedStory = StorySelection(path.getPathComponent(1).toString(), path.getPathComponent(2).toString())
             setCurrentStory(selectedStory)
         }
+    }
+
+    private fun updateCollapsedSettings() {
+        settingsManager.collapsed = collapsedPaths
     }
 
     private fun setupListeners(project: Project) {
@@ -131,6 +139,9 @@ class WindowFactory : ToolWindowFactory, SettingsChangeNotifier {
 
     private fun updateTree() {
         val filterString = panel.filterField.text.trim()
+
+        settingsManager.filter = filterString
+
         if (filterString.isEmpty()) updateTree(tree!!)
         else updateTree(tree!!.filteredTree(filterString))
     }
