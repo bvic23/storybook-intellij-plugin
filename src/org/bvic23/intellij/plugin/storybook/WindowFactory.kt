@@ -18,8 +18,10 @@ import kotlin.concurrent.timerTask
 import javax.swing.event.DocumentEvent
 import javax.swing.event.DocumentListener
 import javax.swing.JTree
-
-
+import javax.swing.event.TreeExpansionEvent
+import javax.swing.event.TreeExpansionListener
+import javax.swing.tree.TreeNode
+import javax.swing.tree.TreePath
 
 
 enum class Status {
@@ -39,29 +41,46 @@ class WindowFactory : ToolWindowFactory, SettingsChangeNotifier {
     private var dotsTimer: Timer? = null
     private var tree: Tree? = null
     private var selectedStory: StorySelection? = null
+    private val collapsedPaths = mutableSetOf<String>()
 
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         createPanel(toolWindow)
         setupMessageBus(project)
         setupTree()
         setupListeners(project)
-        panel.filterField.document.addDocumentListener(object : DocumentListener {
-            override fun changedUpdate(e: DocumentEvent) = update()
-            override fun removeUpdate(e: DocumentEvent) =  update()
-            override fun insertUpdate(e: DocumentEvent) = update()
-            fun update() {
-                val filterString = panel.filterField.text.trim()
-                if (filterString.isEmpty()) return
-                updateTree(tree!!.filteredTree(filterString))
-            }
-        })
+        setupFilter()
         setStatus(WAITING_FOR_CONNECTION)
         connect()
+    }
+
+    private fun setupFilter() {
+        panel.filterField.document.addDocumentListener(object : DocumentListener {
+            override fun changedUpdate(e: DocumentEvent) = update()
+            override fun removeUpdate(e: DocumentEvent) = update()
+            override fun insertUpdate(e: DocumentEvent) = update()
+            fun update() = updateTree()
+        })
     }
 
     private fun setupTree() {
         panel.storyTree.showsRootHandles = false
         panel.storyTree.isRootVisible = false
+        panel.storyTree.addTreeExpansionListener(object: TreeExpansionListener{
+            override fun treeExpanded(event: TreeExpansionEvent?) {
+                if (event == null) return
+                if (event.path.pathCount != 2) return
+                val pathName = event.path.lastPathComponent.toString()
+                collapsedPaths.remove(pathName)
+            }
+
+            override fun treeCollapsed(event: TreeExpansionEvent?) {
+                if (event == null) return
+                if (event.path.pathCount != 2) return
+                val pathName = event.path.lastPathComponent.toString()
+                collapsedPaths.add(pathName)
+            }
+
+        })
         panel.storyTree.selectionModel.addTreeSelectionListener { node ->
             val path = node.path
             if (path.pathCount < 3) return@addTreeSelectionListener
@@ -93,7 +112,7 @@ class WindowFactory : ToolWindowFactory, SettingsChangeNotifier {
             setStatus(READY)
             if (stories[0] is StoriesArg){
                 tree = (stories[0] as StoriesArg).toTree()
-                updateTree(tree!!)
+                updateTree()
             }
         }
 
@@ -110,15 +129,35 @@ class WindowFactory : ToolWindowFactory, SettingsChangeNotifier {
         }
     }
 
-    private fun updateTree(tree: Tree) {
-        panel.storyTree.model = tree.toJTreeModel()
-        expandAllNodes(panel.storyTree)
+    private fun updateTree() {
+        val filterString = panel.filterField.text.trim()
+        if (filterString.isEmpty()) updateTree(tree!!)
+        else updateTree(tree!!.filteredTree(filterString))
     }
 
-    private fun expandAllNodes(tree: JTree) {
-        val rowCount = tree.rowCount
-        for (i in 0..rowCount - 1) {
-            tree.expandRow(i)
+
+    private fun updateTree(tree: Tree) {
+        panel.storyTree.model = tree.toJTreeModel()
+        expandAll(panel.storyTree)
+    }
+
+    private fun expandAll(tree: JTree) {
+        val root = tree.model.root as TreeNode
+        expandAll(tree, TreePath(root))
+    }
+
+    private fun expandAll(tree: JTree, parent: TreePath) {
+        val node = parent.lastPathComponent as TreeNode
+        if (node.childCount >= 0) {
+            val e = node.children()
+            while (e.hasMoreElements()) {
+                val n = e.nextElement() as TreeNode
+                val path = parent.pathByAddingChild(n)
+                expandAll(tree, path)
+            }
+        }
+        if (!collapsedPaths.contains(parent.lastPathComponent.toString())) {
+            tree.expandPath(parent)
         }
     }
 
