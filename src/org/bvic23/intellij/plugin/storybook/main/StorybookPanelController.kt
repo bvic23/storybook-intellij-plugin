@@ -14,8 +14,6 @@ import org.bvic23.intellij.plugin.storybook.settings.SettingsController
 import org.bvic23.intellij.plugin.storybook.settings.SettingsManager
 import org.bvic23.intellij.plugin.storybook.socket.SocketClient
 import java.util.*
-import javax.swing.event.DocumentEvent
-import javax.swing.event.DocumentListener
 import javax.websocket.CloseReason
 import kotlin.concurrent.fixedRateTimer
 import kotlin.concurrent.timerTask
@@ -40,15 +38,16 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
     private val treeController = TreeController(panel.storyTree, settingsManager) { storySelection ->
         setCurrentStory(storySelection)
     }
+    private val filterController = FilterController(panel.filterField, settingsManager) {
+        updateTree()
+    }
 
     val content
         get() = ContentFactory.SERVICE.getInstance().createContent(panel.contentPane, "", false)
 
     init {
         setupMessageBus(project)
-        setupFilter()
         setupListeners(project)
-        setupFilter()
         setStatus(WAITING_FOR_CONNECTION)
         connect()
     }
@@ -63,27 +62,15 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
         connect()
     }
 
-    private fun setupFilter() {
-        panel.filterField.text = settingsManager.filter
-        panel.filterField.document.addDocumentListener(object : DocumentListener {
-            override fun changedUpdate(e: DocumentEvent) = updateTree()
-            override fun removeUpdate(e: DocumentEvent) = updateTree()
-            override fun insertUpdate(e: DocumentEvent) = updateTree()
-        })
-    }
-
-    private fun updateTree() {
-        val filterString = panel.filterField.text.trim()
-
-        treeController.model = if (filterString.isEmpty()) tree
-        else tree.filteredTree(filterString)
-
-        settingsManager.filter = filterString
-    }
-
     private fun setCurrentStory(story: StorySelection) {
         selectedStory = story
         socketClient.sendText(story.toMessage())
+    }
+
+    private fun updateTree() {
+        val filterString = filterController.filterString
+        treeController.model = if (filterString.isEmpty()) tree
+        else tree.filteredTree(filterString)
     }
 
     private fun setupListeners(project: Project) {

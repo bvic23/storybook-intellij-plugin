@@ -9,8 +9,7 @@ import javax.swing.event.TreeExpansionListener
 import javax.swing.tree.TreeNode
 import javax.swing.tree.TreePath
 
-class TreeController(val tree: JTree, val settingsManager: SettingsManager, val onSelection: (StorySelection) -> Unit) {
-
+class TreeController(private val tree: JTree, private val settingsManager: SettingsManager, private val onSelection: (StorySelection) -> Unit) {
     private var collapsedPaths = settingsManager.collapsed
 
     var model = Tree(emptyList())
