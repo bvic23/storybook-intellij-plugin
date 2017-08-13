@@ -1,6 +1,5 @@
 package org.bvic23.intellij.plugin.storybook.socket
 
-import org.bvic23.intellij.plugin.storybook.MessageParser
 import org.glassfish.tyrus.client.ClientManager
 import java.net.URI
 import javax.websocket.*

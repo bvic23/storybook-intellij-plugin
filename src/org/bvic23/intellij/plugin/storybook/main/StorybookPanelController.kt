@@ -1,14 +1,13 @@
-package org.bvic23.intellij.plugin.storybook
+package org.bvic23.intellij.plugin.storybook.main
 
 import com.intellij.openapi.options.ShowSettingsUtil
 import com.intellij.openapi.project.Project
-import com.intellij.ui.content.Content
 import com.intellij.ui.content.ContentFactory
 import org.bvic23.intellij.plugin.storybook.models.GeneralMessage
 import org.bvic23.intellij.plugin.storybook.models.StoriesArg
 import org.bvic23.intellij.plugin.storybook.models.StorySelection
 import org.bvic23.intellij.plugin.storybook.models.Tree
-import org.bvic23.intellij.plugin.storybook.settings.SettingsChangeNotifier
+import org.bvic23.intellij.plugin.storybook.notifications.SettingsChangeNotifier
 import org.bvic23.intellij.plugin.storybook.settings.SettingsController
 import org.bvic23.intellij.plugin.storybook.settings.SettingsManager
 import org.bvic23.intellij.plugin.storybook.socket.SocketClient
@@ -23,7 +22,8 @@ import javax.swing.tree.TreePath
 import javax.websocket.CloseReason
 import kotlin.concurrent.fixedRateTimer
 import kotlin.concurrent.timerTask
-import org.bvic23.intellij.plugin.storybook.Status.*
+import org.bvic23.intellij.plugin.storybook.main.Status.*
+import org.bvic23.intellij.plugin.storybook.notifications.NotificationManager
 
 enum class Status {
     WAITING_FOR_CONNECTION,
@@ -82,7 +82,7 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
 
         settingsManager.filter = filterString
 
-        if (filterString?.isEmpty()) updateTree(tree!!)
+        if (filterString.isEmpty()) updateTree(tree!!)
         else updateTree(tree!!.filteredTree(filterString))
     }
 
@@ -217,8 +217,8 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
 
     private fun updateStatusLabels() {
         panel.statusField.text = when (status) {
-            Status.WAITING_FOR_CONNECTION -> "Waiting for storybook${dots}"
-            Status.WAITING_FOR_STORIES -> "Waiting for story list${dots}"
+            Status.WAITING_FOR_CONNECTION -> "Waiting for storybook$dots"
+            Status.WAITING_FOR_STORIES -> "Waiting for story list$dots"
             Status.READY -> ""
         }
 

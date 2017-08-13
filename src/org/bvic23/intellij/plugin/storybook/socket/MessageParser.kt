@@ -1,4 +1,4 @@
-package org.bvic23.intellij.plugin.storybook
+package org.bvic23.intellij.plugin.storybook.socket
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.*

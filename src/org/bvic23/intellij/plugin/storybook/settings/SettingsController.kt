@@ -3,6 +3,7 @@ package org.bvic23.intellij.plugin.storybook.settings
 import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.options.ConfigurationException
 import com.intellij.util.messages.MessageBus
+import org.bvic23.intellij.plugin.storybook.notifications.SettingsChangeNotifier
 import org.jetbrains.annotations.Nls
 import javax.swing.JComponent
 

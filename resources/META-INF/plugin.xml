@@ -18,7 +18,7 @@
     <applicationConfigurable instance="org.bvic23.intellij.plugin.storybook.settings.SettingsController"/>
     <toolWindow id="Storybook"
                 secondary="true"
-                icon="/org/bvic23/intellij/plugin/storybook/plus.png"
+                icon="/org/bvic23/intellij/plugin/storybook/assets/plus.png"
                 anchor="left"
                 factoryClass="org.bvic23.intellij.plugin.storybook.WindowFactory"/>
 

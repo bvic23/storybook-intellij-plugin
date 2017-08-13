@@ -1,4 +1,4 @@
-package org.bvic23.intellij.plugin.storybook.settings
+package org.bvic23.intellij.plugin.storybook.notifications
 
 import com.intellij.util.messages.Topic
 
