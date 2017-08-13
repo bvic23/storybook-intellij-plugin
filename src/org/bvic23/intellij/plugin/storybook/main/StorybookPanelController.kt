@@ -3,27 +3,22 @@ package org.bvic23.intellij.plugin.storybook.main
 import com.intellij.openapi.options.ShowSettingsUtil
 import com.intellij.openapi.project.Project
 import com.intellij.ui.content.ContentFactory
+import org.bvic23.intellij.plugin.storybook.main.Status.WAITING_FOR_CONNECTION
 import org.bvic23.intellij.plugin.storybook.models.GeneralMessage
 import org.bvic23.intellij.plugin.storybook.models.StoriesArg
 import org.bvic23.intellij.plugin.storybook.models.StorySelection
 import org.bvic23.intellij.plugin.storybook.models.Tree
+import org.bvic23.intellij.plugin.storybook.notifications.NotificationManager
 import org.bvic23.intellij.plugin.storybook.notifications.SettingsChangeNotifier
 import org.bvic23.intellij.plugin.storybook.settings.SettingsController
 import org.bvic23.intellij.plugin.storybook.settings.SettingsManager
 import org.bvic23.intellij.plugin.storybook.socket.SocketClient
 import java.util.*
-import javax.swing.JTree
 import javax.swing.event.DocumentEvent
 import javax.swing.event.DocumentListener
-import javax.swing.event.TreeExpansionEvent
-import javax.swing.event.TreeExpansionListener
-import javax.swing.tree.TreeNode
-import javax.swing.tree.TreePath
 import javax.websocket.CloseReason
 import kotlin.concurrent.fixedRateTimer
 import kotlin.concurrent.timerTask
-import org.bvic23.intellij.plugin.storybook.main.Status.*
-import org.bvic23.intellij.plugin.storybook.notifications.NotificationManager
 
 enum class Status {
     WAITING_FOR_CONNECTION,
@@ -40,17 +35,18 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
     private var status = WAITING_FOR_CONNECTION
     private var dots = ""
     private var dotsTimer: Timer? = null
-    private var tree: Tree? = null
-    private var selectedStory: StorySelection? = null
-    private val collapsedPaths = mutableSetOf<String>()
-    private val contentFactory = ContentFactory.SERVICE.getInstance()
+    private var tree = Tree(emptyList())
+    private var selectedStory = StorySelection("", "")
+    private val treeController = TreeController(panel.storyTree, settingsManager) { storySelection ->
+        setCurrentStory(storySelection)
+    }
 
-    val content = contentFactory.createContent(panel.contentPane, "", false)
+    val content
+        get() = ContentFactory.SERVICE.getInstance().createContent(panel.contentPane, "", false)
 
     init {
         setupMessageBus(project)
         setupFilter()
-        setupTree()
         setupListeners(project)
         setupFilter()
         setStatus(WAITING_FOR_CONNECTION)
@@ -70,80 +66,24 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
     private fun setupFilter() {
         panel.filterField.text = settingsManager.filter
         panel.filterField.document.addDocumentListener(object : DocumentListener {
-            override fun changedUpdate(e: DocumentEvent) = update()
-            override fun removeUpdate(e: DocumentEvent) = update()
-            override fun insertUpdate(e: DocumentEvent) = update()
-            fun update() = updateTree()
+            override fun changedUpdate(e: DocumentEvent) = updateTree()
+            override fun removeUpdate(e: DocumentEvent) = updateTree()
+            override fun insertUpdate(e: DocumentEvent) = updateTree()
         })
     }
 
     private fun updateTree() {
         val filterString = panel.filterField.text.trim()
 
+        treeController.model = if (filterString.isEmpty()) tree
+        else tree.filteredTree(filterString)
+
         settingsManager.filter = filterString
-
-        if (filterString.isEmpty()) updateTree(tree!!)
-        else updateTree(tree!!.filteredTree(filterString))
     }
 
-
-    private fun updateTree(tree: Tree) {
-        panel.storyTree.model = tree.toJTreeModel()
-        expandAll(panel.storyTree)
-    }
-
-    private fun expandAll(tree: JTree) {
-        val root = tree.model.root as TreeNode
-        expandAll(tree, TreePath(root))
-    }
-
-    private fun expandAll(tree: JTree, parent: TreePath) {
-        val node = parent.lastPathComponent as TreeNode
-        if (node.childCount >= 0) {
-            val e = node.children()
-            while (e.hasMoreElements()) {
-                val n = e.nextElement() as TreeNode
-                val path = parent.pathByAddingChild(n)
-                expandAll(tree, path)
-            }
-        }
-        if (!collapsedPaths.contains(parent.lastPathComponent.toString())) {
-            tree.expandPath(parent)
-        }
-    }
-
-    private fun setupTree() {
-        collapsedPaths.addAll(settingsManager.collapsed)
-        panel.storyTree.showsRootHandles = false
-        panel.storyTree.isRootVisible = false
-        panel.storyTree.addTreeExpansionListener(object: TreeExpansionListener {
-            override fun treeExpanded(event: TreeExpansionEvent?) {
-                if (event == null) return
-                if (event.path.pathCount != 2) return
-                val pathName = event.path.lastPathComponent.toString()
-                collapsedPaths.remove(pathName)
-                updateCollapsedSettings()
-            }
-
-            override fun treeCollapsed(event: TreeExpansionEvent?) {
-                if (event == null) return
-                if (event.path.pathCount != 2) return
-                val pathName = event.path.lastPathComponent.toString()
-                collapsedPaths.add(pathName)
-                updateCollapsedSettings()
-            }
-
-        })
-        panel.storyTree.selectionModel.addTreeSelectionListener { node ->
-            val path = node.path
-            if (path.pathCount < 3) return@addTreeSelectionListener
-            val selectedStory = StorySelection(path.getPathComponent(1).toString(), path.getPathComponent(2).toString())
-            setCurrentStory(selectedStory)
-        }
-    }
-
-    private fun updateCollapsedSettings() {
-        settingsManager.collapsed = collapsedPaths
+    private fun setCurrentStory(story: StorySelection) {
+        selectedStory = story
+        socketClient.sendText(story.toMessage())
     }
 
     private fun setupListeners(project: Project) {
@@ -167,15 +107,13 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
 
         socketClient.on("setStories") { stories ->
             setStatus(Status.READY)
-            if (stories[0] is StoriesArg){
+            if (stories[0] is StoriesArg) {
                 tree = (stories[0] as StoriesArg).toTree()
                 updateTree()
             }
         }
 
-        socketClient.on("getCurrentStory") { _ ->
-            if (selectedStory != null) setCurrentStory(selectedStory!!)
-        }
+        socketClient.on("getCurrentStory") { _ -> setCurrentStory(selectedStory) }
 
         socketClient.onOpen {
             notificationManager.info("connected")
@@ -185,10 +123,6 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
             socketClient.sendText(GeneralMessage("getStories", emptyList()).toMessage())
         }
     }
-
-
-    private fun setCurrentStory(selectedStory: StorySelection) = socketClient.sendText(selectedStory.toMessage())
-
 
     private fun setStatus(newStatus: Status) {
         status = newStatus
@@ -244,6 +178,5 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
             }, 1000)
         }
     }
-
 
 }
