@@ -18,14 +18,15 @@ import javax.websocket.CloseReason
 import kotlin.concurrent.timerTask
 import org.bvic23.intellij.plugin.storybook.main.State.*
 
-
 class StorybookPanelController(project: Project) : SettingsChangeNotifier {
     private val panel = StorybookPanel()
-    private var settingsManager = SettingsManager()
-    private val socketClient = SocketClient()
     private val notificationManager = NotificationManager()
+    private val getStoriesMessage = GeneralMessage("getStories")
+    private val settingsManager = SettingsManager()
+    private val socketClient = SocketClient(notificationManager)
+
     private var showFailedMessage = false
-    private var tree = Tree(emptyList())
+    private var tree = Tree.empty
     private var selectedStory = StorySelection("", "")
 
     private val treeController = TreeController(panel.storyTree, settingsManager) { storySelection ->
@@ -48,27 +49,6 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
         setupMessageBus(project)
         setupListeners(project)
         connect()
-    }
-
-    private fun setupMessageBus(project: Project) {
-        SettingsController.messageBus = project.messageBus
-        project.messageBus.connect().subscribe(SettingsChangeNotifier.SETTINGS_CHANGE_TOPIC, this)
-    }
-
-    override fun onSettingsChange() {
-        notificationManager.info("settings has changed, try to reconnect...")
-        connect()
-    }
-
-    private fun setCurrentStory(story: StorySelection) {
-        selectedStory = story
-        socketClient.sendText(story.toMessage())
-    }
-
-    private fun updateTree() {
-        val filterString = filterController.filterString
-        treeController.model = if (filterString.isEmpty()) tree
-        else tree.filteredTree(filterString)
     }
 
     private fun setupListeners(project: Project) {
@@ -104,7 +84,7 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
             notificationManager.info("connected")
             showFailedMessage = false
             stateManager.state = WAITING_FOR_STORIES
-            socketClient.sendText(GeneralMessage("getStories", emptyList()).toMessage())
+            socketClient.send(getStoriesMessage)
         }
     }
 
@@ -122,6 +102,27 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
                 connect()
             }, 1000)
         }
+    }
+
+    private fun setupMessageBus(project: Project) {
+        SettingsController.messageBus = project.messageBus
+        project.messageBus.connect().subscribe(SettingsChangeNotifier.SETTINGS_CHANGE_TOPIC, this)
+    }
+
+    override fun onSettingsChange() {
+        notificationManager.info("settings has changed, try to reconnect...")
+        connect()
+    }
+
+    private fun setCurrentStory(story: StorySelection) {
+        selectedStory = story
+        socketClient.send(story.toMessage())
+    }
+
+    private fun updateTree() {
+        val filterString = filterController.filterString
+        treeController.model = if (filterString.isEmpty()) tree
+        else tree.filteredTree(filterString)
     }
 
 }

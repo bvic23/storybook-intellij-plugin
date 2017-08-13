@@ -19,11 +19,23 @@ data class Tree(val kinds: List<Kind>) {
 
     fun filteredTree(filterString: String) = Tree(
         this.kinds.map {
-            Kind(it.kind, filterStories(it.stories, filterString))
+            Kind(it.kind, filterStories(it.stories, it.kind, removeSpaces(filterString)))
         }.filter{
             it.stories.isNotEmpty()
         }
     )
 
-    private fun filterStories(stories: List<String>, filterString: String) = stories.filter { it.contains(filterString, true) }
+    private fun removeSpaces(filterString: String) = filterString.replace(" ", "")
+
+    private fun filterStories(stories: List<String>, kindName: String, filterString: String) = stories.filter { contains(removeSpaces(kindName + it), filterString) }
+
+    private fun contains(haystack: String, filterString: String): Boolean {
+
+        return haystack.contains(filterString, true)
+    }
+
+    companion object {
+        val empty = Tree(emptyList())
+    }
+
 }
