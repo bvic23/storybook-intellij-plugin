@@ -6,17 +6,36 @@ import org.bvic23.intellij.plugin.storybook.settings.SettingsManager
 import javax.swing.JTree
 import javax.swing.event.TreeExpansionEvent
 import javax.swing.event.TreeExpansionListener
-import javax.swing.tree.TreeNode
-import javax.swing.tree.TreePath
+import javax.swing.tree.*
+import com.sun.tools.internal.ws.wsdl.parser.Util.nextElement
+import javax.swing.tree.DefaultMutableTreeNode
+import java.util.Enumeration
+
+
 
 class TreeController(private val tree: JTree, private val settingsManager: SettingsManager, private val onSelection: (StorySelection) -> Unit) {
     private var collapsedPaths = settingsManager.collapsed
+    private var lastSelectedPath: TreePath? = null
 
     var model = Tree(emptyList())
         set(value) {
             tree.model = value.toJTreeModel()
             val root = tree.model.root as TreeNode
             expandAll(tree, TreePath(root))
+        }
+
+    var selectedStory = StorySelection("", "")
+        set(value) {
+            val path = value.toPath()
+            val pathString = path.toString()
+            val selectedPath = tree.selectionPath?.toString()?: ""
+            if (selectedPath != pathString) {
+/*
+                val model = DefaultTreeSelectionModel()
+                model.selectionPath = path
+*/
+                //tree.selectionModel.selec = path
+            }
         }
 
     init {
@@ -35,6 +54,7 @@ class TreeController(private val tree: JTree, private val settingsManager: Setti
         tree.selectionModel.addTreeSelectionListener { node ->
             val path = node.path
             if (path.pathCount < 3) return@addTreeSelectionListener
+            lastSelectedPath = path
             val kind = path.getPathComponent(1).toString()
             val story = path.getPathComponent(2).toString()
             onSelection(StorySelection(kind, story))
@@ -62,4 +82,20 @@ class TreeController(private val tree: JTree, private val settingsManager: Setti
             tree.expandPath(parent)
         }
     }
+
+  /*  private fun find(root: DefaultMutableTreeNode, story: StorySelection): TreePath? {
+        val e = root.depthFirstEnumeration()
+        while (e.hasMoreElements()) {
+            val node = e.nextElement()
+            if (node.toString().equals(story.story, true)) {
+                return root.getPnode.path)
+            }
+        }
+        return null
+    }
+*/
+
 }
+
+private fun StorySelection.toPath(): TreePath? = if (kind == "" || story == "") null
+else TreePath(arrayOf(DefaultMutableTreeNode("Root"), DefaultMutableTreeNode(kind), DefaultMutableTreeNode(story)))

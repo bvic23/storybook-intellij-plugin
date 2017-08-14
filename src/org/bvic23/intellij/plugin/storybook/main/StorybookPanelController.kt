@@ -4,10 +4,6 @@ import com.intellij.openapi.options.ShowSettingsUtil
 import com.intellij.openapi.project.Project
 import com.intellij.ui.content.ContentFactory
 import org.bvic23.intellij.plugin.storybook.main.State.WAITING_FOR_CONNECTION
-import org.bvic23.intellij.plugin.storybook.models.GeneralMessage
-import org.bvic23.intellij.plugin.storybook.models.StoriesArg
-import org.bvic23.intellij.plugin.storybook.models.StorySelection
-import org.bvic23.intellij.plugin.storybook.models.Tree
 import org.bvic23.intellij.plugin.storybook.notifications.NotificationManager
 import org.bvic23.intellij.plugin.storybook.notifications.SettingsChangeNotifier
 import org.bvic23.intellij.plugin.storybook.settings.SettingsController
@@ -17,11 +13,12 @@ import java.util.*
 import javax.websocket.CloseReason
 import kotlin.concurrent.timerTask
 import org.bvic23.intellij.plugin.storybook.main.State.*
+import org.bvic23.intellij.plugin.storybook.models.*
 
 class StorybookPanelController(project: Project) : SettingsChangeNotifier {
     private val panel = StorybookPanel()
     private val notificationManager = NotificationManager()
-    private val getStoriesMessage = GeneralMessage("getStories")
+    private val getStoriesMessage = GeneralMessage<StoriesArg>("getStories")
     private val settingsManager = SettingsManager()
     private val socketClient = SocketClient(notificationManager)
 
@@ -70,10 +67,18 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
             notificationManager.error("error: $e")
         }
 
-        socketClient.on("setStories") { stories ->
-            if (stories[0] is StoriesArg) {
-                tree = (stories[0] as StoriesArg).toTree()
+        socketClient.on("setStories") { args ->
+            if (args[0] is StoriesArg) {
+                tree = (args[0] as StoriesArg).toTree()
                 updateTree()
+            }
+            stateManager.state = READY
+            setCurrentStory(selectedStory, true)
+        }
+
+        socketClient.on("setCurrentStory") { args ->
+            if (args[0] is StorySelection) {
+                setCurrentStory((args[0] as StorySelection))
             }
             stateManager.state = READY
         }
@@ -98,7 +103,6 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
             }
 
             Timer().schedule(timerTask {
-                print("retry")
                 connect()
             }, 1000)
         }
@@ -114,8 +118,10 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
         connect()
     }
 
-    private fun setCurrentStory(story: StorySelection) {
+    private fun setCurrentStory(story: StorySelection, force: Boolean = false) {
+        if (selectedStory == story && !force) return
         selectedStory = story
+        treeController.selectedStory = story
         socketClient.send(story.toMessage())
     }
 

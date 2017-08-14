@@ -32,8 +32,8 @@ class SocketClient(notificationManager: NotificationManager) {
                 session = newSession
 
                 session?.addMessageHandler(MessageHandler.Whole<String> { json ->
-                    val message = messageParser.parseGeneralMessage(json)
-                    message?.let {
+                    val message = messageParser.parse(json)
+                    if (message != null) {
                         val handler = handlers[message.type]
                         handler?.invoke(message.args)
                     }
@@ -61,5 +61,5 @@ class SocketClient(notificationManager: NotificationManager) {
     fun on(type: String, handler: OnHandler<Any>) = handlers.set(type, handler)
 
     fun send(msg: String) = session?.basicRemote?.sendText(msg)
-    fun send(message: GeneralMessage) = session?.basicRemote?.sendText(message.toMessage())
+    fun send(message: GeneralMessage<Any>) = session?.basicRemote?.sendText(message.toMessage())
 }

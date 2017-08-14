@@ -5,10 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class GeneralMessage(val type: String, val args: List<StoriesArg> = emptyList()) {
+data class GeneralMessage<out T>(val type: String, val args: List<T> = emptyList()) {
     companion object {
         val mapper = ObjectMapper().registerKotlinModule()
     }
 
-    fun toMessage() = mapper.writeValueAsString(this)
+    fun toMessage() = mapper.writeValueAsString(this)!!
 }

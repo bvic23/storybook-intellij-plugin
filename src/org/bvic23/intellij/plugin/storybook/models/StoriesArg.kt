@@ -4,5 +4,5 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class StoriesArg(val stories: List<Kind>) {
-    fun toTree() = Tree(stories)
+    fun toTree() = Tree.fromKinds(stories)
 }

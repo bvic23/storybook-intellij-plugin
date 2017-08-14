@@ -5,34 +5,39 @@ import javax.swing.tree.DefaultMutableTreeNode
 import javax.swing.tree.DefaultTreeModel
 import javax.swing.tree.TreeModel
 
-data class Tree(val kinds: List<Kind>) {
+data class Story(val kind: String, val name: String) {
+    private val normalizedSearchString = (kind + " " + name).normalized
+    private val firstLetters = (kind + " " + name).firstLetters
+    fun similarTo(target: String) = normalizedSearchString.similar(target, 10) || firstLetters.similar(target, 3)
+}
+
+data class Tree(val nodes: List<Story>) {
+
     fun toJTreeModel(): TreeModel {
         val root = DefaultMutableTreeNode("Root")
-        kinds.map{ mapKind(it) }.forEach { root.add(it) }
+        val groups = nodes.groupBy { it.kind }
+        groups.forEach { key, stories ->
+            val node = DefaultMutableTreeNode(key)
+            stories.forEach { node.add(DefaultMutableTreeNode(it.name)) }
+            root.add(node)
+        }
         return DefaultTreeModel(root)
     }
 
-    private fun mapKind(kind: Kind): DefaultMutableTreeNode {
-        val result = DefaultMutableTreeNode(kind.kind)
-        kind.stories.map { DefaultMutableTreeNode(it) }.forEach { result.add(it) }
-        return result
+    fun filteredTree(filterString: String): Tree {
+        val fs = filterString.normalized
+        val matchingNodes = nodes.filter { it.similarTo(fs) }
+        return Tree(matchingNodes)
     }
-
-    fun filteredTree(filterString: String) = Tree(
-        this.kinds.map {
-            Kind(it.kind, filterStories(it.stories, it.kind, filterString))
-        }.filter{
-            it.stories.isNotEmpty()
-        }
-    )
-
-    private fun filterStories(stories: List<String>, kindName: String, filterString: String) = stories.filter { contains(kindName + " " + it , filterString) }
-    private fun contains(haystack: String, needle: String) = haystack.similar(needle, 10)|| haystack.firstLetters.similar(needle, 3)
 
     companion object {
         val empty = Tree(emptyList())
-    }
 
+        fun fromKinds(kinds: List<Kind>): Tree {
+            val nodes = kinds.flatMap { (kind, stories) -> stories.map {story -> Story(kind, story) }}
+            return Tree(nodes)
+        }
+    }
 }
 
 private val String.normalized

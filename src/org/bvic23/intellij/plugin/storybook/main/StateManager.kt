@@ -6,13 +6,14 @@ import kotlin.concurrent.fixedRateTimer
 import org.bvic23.intellij.plugin.storybook.main.State.*
 
 enum class State {
+    UNDEFINED,
     WAITING_FOR_CONNECTION,
     WAITING_FOR_STORIES,
     READY
 }
 
 class StateManager(private val statusField: JLabel, private val subStatusField: JLabel, private val onChange: (State) -> Unit) {
-    var state = WAITING_FOR_CONNECTION
+    var state = UNDEFINED
         set(value) {
             if (value == state) return
             field = value
@@ -23,6 +24,10 @@ class StateManager(private val statusField: JLabel, private val subStatusField: 
         }
     private var dots = ""
     private var dotsTimer: Timer? = null
+
+    init {
+        state = WAITING_FOR_CONNECTION
+    }
 
     private fun startTimer() {
         if (dotsTimer != null) return
@@ -44,13 +49,13 @@ class StateManager(private val statusField: JLabel, private val subStatusField: 
         statusField.text = when (state) {
             WAITING_FOR_CONNECTION -> "Waiting for storybook$dots"
             WAITING_FOR_STORIES -> "Waiting for story list$dots"
-            READY -> ""
+            else -> ""
         }
 
         subStatusField.text = when (state) {
             WAITING_FOR_CONNECTION -> "Please start storybook from command line!"
             WAITING_FOR_STORIES -> "Please refresh your [simu|emu]lator!"
-            READY -> ""
+            else -> ""
         }
     }
 }
