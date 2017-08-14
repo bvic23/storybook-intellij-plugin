@@ -1,8 +1,11 @@
 package org.bvic23.intellij.plugin.storybook.main
 
+import com.intellij.openapi.project.Project
+import org.bvic23.intellij.plugin.storybook.locator.FileLocator
 import org.bvic23.intellij.plugin.storybook.models.Story
 import org.bvic23.intellij.plugin.storybook.models.Tree
 import org.bvic23.intellij.plugin.storybook.settings.SettingsManager
+import java.awt.event.*
 import javax.swing.JTree
 import javax.swing.event.TreeExpansionEvent
 import javax.swing.event.TreeExpansionListener
@@ -11,9 +14,10 @@ import javax.swing.tree.DefaultTreeModel
 import javax.swing.tree.TreeNode
 import javax.swing.tree.TreePath
 
-class TreeController(private val tree: JTree, private val settingsManager: SettingsManager, private val onSelection: (Story) -> Unit) {
+class TreeController(private val tree: JTree, private val settingsManager: SettingsManager, private val project: Project, private val onSelection: (Story) -> Unit) {
     private var collapsedPaths = settingsManager.collapsed
     private var treeModel = DefaultTreeModel(DefaultMutableTreeNode(), false)
+    private val fileLocator = FileLocator(project)
 
     var model = Tree(emptyList())
         set(value) {
@@ -47,10 +51,43 @@ class TreeController(private val tree: JTree, private val settingsManager: Setti
         tree.selectionModel.addTreeSelectionListener { node ->
             val path = node.path
             if (path.pathCount < 3) return@addTreeSelectionListener
-            val kind = path.getPathComponent(1).toString()
-            val story = path.getPathComponent(2).toString()
-            onSelection(Story(kind, story))
+            val story = storyFromPath(path)
+            onSelection(story)
         }
+        tree.addKeyListener(object: KeyListener {
+            override fun keyTyped(e: KeyEvent?) {}
+            override fun keyPressed(e: KeyEvent?) {}
+            override fun keyReleased(e: KeyEvent) {
+                val code = e.keyCode
+                when (code) {
+                    KeyEvent.VK_ENTER -> {
+                        openSelectedStoryFile()
+                    }
+                    KeyEvent.VK_LEFT -> {}
+                    KeyEvent.VK_RIGHT -> {}
+                }
+            }
+        })
+        tree.addMouseListener(object: MouseAdapter() {
+            override fun mousePressed(e: MouseEvent) {
+                if (e.clickCount == 1) {
+                    return super.mousePressed(e)
+                }
+                openSelectedStoryFile()
+            }
+        })
+    }
+
+    private fun openSelectedStoryFile() {
+        val story = storyFromPath(tree.selectionPath)
+        fileLocator.openFileForStory(story)
+    }
+
+    private fun storyFromPath(path: TreePath): Story {
+        val kind = path.getPathComponent(1).toString()
+        val storyName = path.getPathComponent(2).toString()
+        val story = Story(kind, storyName)
+        return story
     }
 
     private fun updateCollapsedSettings(event: TreeExpansionEvent?, update: (Set<String>, String) -> Set<String>) {

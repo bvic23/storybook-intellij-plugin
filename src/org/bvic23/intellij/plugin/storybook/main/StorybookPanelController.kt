@@ -31,7 +31,7 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
     private var showFailedMessage = false
     private var tree = Tree.empty
 
-    private val treeController = TreeController(panel.storyTree, settingsManager) { storySelection ->
+    private val treeController = TreeController(panel.storyTree, settingsManager, project) { storySelection ->
         setCurrentStory(storySelection)
     }
 
@@ -71,7 +71,6 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
                     KeyEvent.VK_RIGHT -> {}
                 }
             }
-
         })
 
         socketClient.onClose { reason ->
