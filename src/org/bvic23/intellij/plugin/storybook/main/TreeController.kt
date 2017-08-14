@@ -13,12 +13,12 @@ import javax.swing.tree.TreePath
 
 class TreeController(private val tree: JTree, private val settingsManager: SettingsManager, private val onSelection: (StorySelection) -> Unit) {
     private var collapsedPaths = settingsManager.collapsed
-    private var treeModel = DefaultTreeModel(DefaultMutableTreeNode(), true)
+    private var treeModel = DefaultTreeModel(DefaultMutableTreeNode(), false)
 
     var model = Tree(emptyList())
         set(value) {
             val root = value.toJTreeModel()
-            treeModel = DefaultTreeModel(root, true)
+            treeModel = DefaultTreeModel(root, false)
             tree.model = treeModel
             expandAll(tree, TreePath(root))
         }
@@ -26,11 +26,7 @@ class TreeController(private val tree: JTree, private val settingsManager: Setti
     var selectedStory = StorySelection("", "")
         set(value) {
             val path = value.toPath()
-            val pathString = path.toString()
-            val selectedPath = tree.selectionPath?.toString() ?: ""
-            if (selectedPath != pathString) {
-                manualSelect(path)
-            }
+            manualSelect(path)
         }
 
     init {
@@ -79,6 +75,7 @@ class TreeController(private val tree: JTree, private val settingsManager: Setti
 
     private fun manualSelect(path: Array<String>) {
         var target = tree.model.root as DefaultMutableTreeNode
+
         for (uo in path.drop(1)) {
             target = getNodeByUserObject(target, uo)?: return
         }
@@ -89,19 +86,15 @@ class TreeController(private val tree: JTree, private val settingsManager: Setti
     private fun navigateToNode(node: DefaultMutableTreeNode) {
         val nodes = treeModel.getPathToRoot(node)
         val treePath = TreePath(nodes)
+        tree.makeVisible(treePath)
         tree.scrollPathToVisible(treePath)
         tree.selectionPath = treePath
     }
 
-    private fun getNodeByUserObject(node: DefaultMutableTreeNode, o: Any): DefaultMutableTreeNode? {
-        for (i in 0..node.childCount - 1) {
-            val child = node.getChildAt(i) as DefaultMutableTreeNode
-            if (child.userObject == o) {
-                return child
-            }
-        }
-        return null
-    }
+    private fun getNodeByUserObject(node: DefaultMutableTreeNode, o: Any) = node.children()
+        .asSequence()
+        .map { it as DefaultMutableTreeNode }
+        .firstOrNull { it.userObject == o }
 
 }
 

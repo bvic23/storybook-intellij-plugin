@@ -73,7 +73,10 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
                 updateTree()
             }
             stateManager.state = READY
-            setCurrentStory(selectedStory, true)
+
+            Timer().schedule(timerTask {
+                setCurrentStory(selectedStory, true)
+            }, 500)
         }
 
         socketClient.on("setCurrentStory") { args ->
