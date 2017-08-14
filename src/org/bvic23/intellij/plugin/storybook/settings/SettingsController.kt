@@ -9,7 +9,6 @@ import javax.swing.JComponent
 
 class SettingsController : Configurable {
     private val panel = SettingsPanel()
-    private val settingsManager = SettingsManager()
 
     @Nls
     override fun getDisplayName(): String {
@@ -64,6 +63,7 @@ class SettingsController : Configurable {
     private fun getPort() = panel.portField.text.trim()
 
     companion object {
-        var messageBus: MessageBus? = null;
+        lateinit var messageBus: MessageBus
+        lateinit var settingsManager: SettingsManager
     }
 }

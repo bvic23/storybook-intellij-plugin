@@ -19,7 +19,7 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
     private val panel = StorybookPanel()
     private val notificationManager = NotificationManager()
     private val getStoriesMessage = GeneralMessage<StoriesArg>("getStories")
-    private val settingsManager = SettingsManager()
+    private val settingsManager = SettingsManager(project.name)
     private val socketClient = SocketClient(notificationManager)
 
     private var showFailedMessage = false
@@ -42,7 +42,7 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
         get() = ContentFactory.SERVICE.getInstance().createContent(panel.contentPane, "", false)
 
     init {
-        setupMessageBus(project)
+        setupSettingsAndMessageBus(project)
         setupListeners(project)
         connect()
     }
@@ -110,8 +110,9 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
         }
     }
 
-    private fun setupMessageBus(project: Project) {
+    private fun setupSettingsAndMessageBus(project: Project) {
         SettingsController.messageBus = project.messageBus
+        SettingsController.settingsManager = settingsManager
         project.messageBus.connect().subscribe(SettingsChangeNotifier.SETTINGS_CHANGE_TOPIC, this)
     }
 
