@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9eda42ac-a37a-482e-b0e3-207586218cec" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/StateManager.kt" afterPath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/StateManager.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/StorybookPanelController.kt" afterPath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/StorybookPanelController.kt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/TreeController.kt" afterPath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/TreeController.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/GeneralMessage.kt" afterPath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/GeneralMessage.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StoriesArg.kt" afterPath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StoriesArg.kt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Tree.kt" afterPath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Tree.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/socket/MessageParser.kt" afterPath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/socket/MessageParser.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/socket/SocketClient.kt" afterPath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/socket/SocketClient.kt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,24 +17,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TreeController.kt" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TreeController.kt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/TreeController.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1210">
-              <caret line="90" column="41" lean-forward="false" selection-start-line="90" selection-start-column="41" selection-end-line="90" selection-end-column="41" />
+            <state relative-caret-position="288">
+              <caret line="97" column="0" lean-forward="false" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
               <folding>
-                <element signature="e#51#521#0" expanded="true" />
+                <element signature="e#51#511#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Tree.kt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DefaultTreeModel.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/tree/DefaultTreeModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="193">
+              <caret line="96" column="11" lean-forward="false" selection-start-line="96" selection-start-column="11" selection-end-line="96" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Tree.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Tree.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="20" column="69" lean-forward="false" selection-start-line="20" selection-start-column="69" selection-end-line="20" selection-end-column="69" />
-              <folding />
+            <state relative-caret-position="180">
+              <caret line="14" column="32" lean-forward="false" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+              <folding>
+                <element signature="e#53#175#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -186,8 +191,8 @@
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/StorybookPanelController.kt" />
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/socket/MessageParser.kt" />
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StoriesArg.kt" />
-        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/TreeController.kt" />
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Tree.kt" />
+        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/TreeController.kt" />
       </list>
     </option>
   </component>
@@ -454,7 +459,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44136658" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44136658" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18125854" sideWeight="0.50398177" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -503,7 +508,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="99" />
+      <option name="time" value="104" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -593,17 +598,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/tree/DefaultTreeModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="82" column="12" lean-forward="false" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="12" />
-          <folding>
-            <element signature="e#2331#2332#0" expanded="false" />
-            <element signature="e#2364#2365#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
@@ -673,17 +667,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="11" lean-forward="false" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/JTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="1818" column="16" lean-forward="true" selection-start-line="1818" selection-start-column="16" selection-end-line="1818" selection-end-column="16" />
-          <folding>
-            <element signature="e#58657#58658#0" expanded="false" />
-            <element signature="e#58715#58716#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -844,21 +827,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/TreeController.kt">
+    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Tree.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1210">
-          <caret line="90" column="41" lean-forward="false" selection-start-line="90" selection-start-column="41" selection-end-line="90" selection-end-column="41" />
+        <state relative-caret-position="180">
+          <caret line="14" column="32" lean-forward="false" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
           <folding>
-            <element signature="e#51#521#0" expanded="true" />
+            <element signature="e#53#175#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Tree.kt">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/JTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="20" column="69" lean-forward="false" selection-start-line="20" selection-start-column="69" selection-end-line="20" selection-end-column="69" />
+        <state relative-caret-position="462">
+          <caret line="835" column="21" lean-forward="false" selection-start-line="835" selection-start-column="21" selection-end-line="835" selection-end-column="21" />
+          <folding>
+            <element signature="e#29578#29579#0" expanded="false" />
+            <element signature="e#29610#29611#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/tree/DefaultTreeModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="96" column="11" lean-forward="false" selection-start-line="96" selection-start-column="11" selection-end-line="96" selection-end-column="11" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/TreeController.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="97" column="0" lean-forward="false" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+          <folding>
+            <element signature="e#51#511#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

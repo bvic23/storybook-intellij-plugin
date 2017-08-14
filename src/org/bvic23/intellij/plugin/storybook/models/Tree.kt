@@ -2,8 +2,7 @@ package org.bvic23.intellij.plugin.storybook.models
 
 import org.apache.commons.lang.StringUtils
 import javax.swing.tree.DefaultMutableTreeNode
-import javax.swing.tree.DefaultTreeModel
-import javax.swing.tree.TreeModel
+import javax.swing.tree.TreeNode
 
 data class Story(val kind: String, val name: String) {
     private val normalizedSearchString = (kind + " " + name).normalized
@@ -13,7 +12,7 @@ data class Story(val kind: String, val name: String) {
 
 data class Tree(val nodes: List<Story>) {
 
-    fun toJTreeModel(): TreeModel {
+    fun toJTreeModel(): TreeNode {
         val root = DefaultMutableTreeNode("Root")
         val groups = nodes.groupBy { it.kind }
         groups.forEach { key, stories ->
@@ -21,7 +20,7 @@ data class Tree(val nodes: List<Story>) {
             stories.forEach { node.add(DefaultMutableTreeNode(it.name)) }
             root.add(node)
         }
-        return DefaultTreeModel(root)
+        return root
     }
 
     fun filteredTree(filterString: String): Tree {
