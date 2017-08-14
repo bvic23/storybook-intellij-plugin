@@ -1,6 +1,8 @@
 package org.bvic23.intellij.plugin.storybook.settings
 
 import com.intellij.ide.util.PropertiesComponent
+import org.bvic23.intellij.plugin.storybook.models.Story
+
 fun String.removePrefix(prefix: String) = this.replace(prefix, "")
 
 class SettingsManager {
@@ -13,10 +15,15 @@ class SettingsManager {
     private val COLLAPSED_KEY = "COLLAPSED_KEY"
     private val HOST_KEY = "HOST_KEY"
     private val PORT_KEY = "PORT_KEY"
+    private val SELECTED_KEY = "SELECTED_KEY"
 
     var filter
         get() = getValue(FILTER_KEY) ?: ""
         set(value) = setValue(FILTER_KEY, value)
+
+    var story: Story
+        get() = Story.fromJSON(getValue(SELECTED_KEY)) ?: Story("", "")
+        set(value) = setValue(SELECTED_KEY, value.toJSON())
 
     var collapsed: Set<String>
         get() {

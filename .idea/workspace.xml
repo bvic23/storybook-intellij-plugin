@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9eda42ac-a37a-482e-b0e3-207586218cec" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Story.kt" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StorySelection.kt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/StorybookPanelController.kt" afterPath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/StorybookPanelController.kt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/TreeController.kt" afterPath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/TreeController.kt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/GeneralMessage.kt" afterPath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/GeneralMessage.kt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StorySelectionMessage.kt" afterPath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StorySelectionMessage.kt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Tree.kt" afterPath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Tree.kt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/settings/SettingsManager.kt" afterPath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/settings/SettingsManager.kt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/socket/MessageParser.kt" afterPath="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/socket/MessageParser.kt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,39 +28,32 @@
       <file leaf-file-name="TreeController.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/TreeController.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-356">
-              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state relative-caret-position="207">
+              <caret line="25" column="45" lean-forward="false" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
               <folding>
-                <element signature="e#51#511#0" expanded="true" />
+                <element signature="e#51#502#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StorybookPanel.form" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/StorybookPanel.form">
-          <provider selected="true" editor-type-id="ui-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Tree.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Tree.kt">
+      <file leaf-file-name="SettingsManager.kt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/settings/SettingsManager.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="14" column="32" lean-forward="false" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+            <state relative-caret-position="317">
+              <caret line="25" column="42" lean-forward="false" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
               <folding>
-                <element signature="e#53#175#0" expanded="true" />
+                <element signature="e#55#160#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StorybookPanelController.kt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StorybookPanelController.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/StorybookPanelController.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="79" column="9" lean-forward="true" selection-start-line="79" selection-start-column="9" selection-end-line="79" selection-end-column="9" />
+            <state relative-caret-position="372">
+              <caret line="123" column="36" lean-forward="false" selection-start-line="123" selection-start-column="36" selection-end-line="123" selection-end-column="36" />
               <folding>
                 <element signature="e#51#834#0" expanded="true" />
               </folding>
@@ -61,41 +61,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StateManager.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/StateManager.kt">
+      <file leaf-file-name="Story.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Story.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="33" column="7" lean-forward="false" selection-start-line="33" selection-start-column="7" selection-end-line="36" selection-end-column="9" />
-              <folding />
+            <state relative-caret-position="240">
+              <caret line="16" column="60" lean-forward="false" selection-start-line="16" selection-start-column="60" selection-end-line="16" selection-end-column="60" />
+              <folding>
+                <element signature="e#53#327#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StoriesArg.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StoriesArg.kt">
+      <file leaf-file-name="StorySelectionMessage.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StorySelectionMessage.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Kind.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Kind.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="11" lean-forward="false" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SocketClient.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/socket/SocketClient.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="870">
-              <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+            <state relative-caret-position="90">
+              <caret line="6" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -107,8 +89,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
-        <option value="Kotlin File" />
         <option value="Kotlin Class" />
+        <option value="Kotlin File" />
+        <option value="Kotlin Object" />
       </list>
     </option>
   </component>
@@ -137,6 +120,7 @@
       <find>getSelectionP</find>
       <find>toString</find>
       <find>setCurrentStory</find>
+      <find>registerKotlinModule()</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -150,9 +134,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/StoryBookPanel.kt" />
-        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/SettingsChangedNotifier.java" />
-        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/StorybookWindowFactory.java" />
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/StoryBookPanel.java" />
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/HelloWorldSettings.java" />
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/StorybookSettings.java" />
@@ -178,9 +159,7 @@
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StoriesArg.java" />
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/TreeParser.kt" />
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/MessageParser.kt" />
-        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StorySelectionMessage.kt" />
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/StorybookPanel.form" />
-        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/settings/SettingsManager.kt" />
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/StorybookPanel.java" />
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/WindowFactory.kt" />
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/StorybookPanelController.kt" />
@@ -193,14 +172,19 @@
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StoryArg.kt" />
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StorySelectionArg.kt" />
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/socket/SocketClient.kt" />
-        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/GeneralMessage.kt" />
-        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StorySelection.kt" />
-        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/socket/MessageParser.kt" />
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StoriesArg.kt" />
-        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Tree.kt" />
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/StorybookPanel.form" />
-        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/TreeController.kt" />
+        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/StringExt.kt" />
+        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StorySelection.kt" />
+        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/JacksonMapper.kt" />
+        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StorySelectionMessage.kt" />
+        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/socket/MessageParser.kt" />
+        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/GeneralMessage.kt" />
+        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Tree.kt" />
+        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Story.kt" />
         <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/StorybookPanelController.kt" />
+        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/TreeController.kt" />
+        <option value="$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/settings/SettingsManager.kt" />
       </list>
     </option>
   </component>
@@ -454,7 +438,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="22" width="1868" height="1178" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -470,11 +453,12 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15060242" sideWeight="0.48476455" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963988" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44136658" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44136658" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18125854" sideWeight="0.50398177" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -483,7 +467,6 @@
       <window_info id="Storybook" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18331054" sideWeight="0.5152355" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963988" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -528,21 +511,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../idea/platform/util/src/com/intellij/util/containers/ConcurrentHashMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="945" column="0" lean-forward="false" selection-start-line="945" selection-start-column="0" selection-end-line="945" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/settings/ChangeActionNotifier.kt" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/glassfish/tyrus/bundles/tyrus-standalone-client/1.13.1/tyrus-standalone-client-1.13.1.jar!/org/glassfish/grizzly/threadpool/AbstractThreadPool.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="55" column="11" lean-forward="false" selection-start-line="55" selection-start-column="11" selection-end-line="55" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/rt.jar!/sun/misc/Unsafe.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="292">
@@ -577,13 +545,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="96" lean-forward="false" selection-start-line="8" selection-start-column="86" selection-end-line="8" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StorySelectionMessage.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="10" column="50" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="10" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -637,13 +598,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/settings/SettingsManager.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="42" column="16" lean-forward="false" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StorySelectionArg.kt" />
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/security/AccessController.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -666,13 +620,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StorySelection.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="11" lean-forward="false" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/tree/DefaultMutableTreeNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
@@ -681,20 +628,6 @@
             <element signature="e#4357#4358#0" expanded="false" />
             <element signature="e#4395#4396#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/GeneralMessage.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/socket/MessageParser.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="5" lean-forward="true" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -812,24 +745,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StoriesArg.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Tree.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="14" column="32" lean-forward="false" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
-          <folding>
-            <element signature="e#53#175#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/JTree.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
@@ -849,6 +764,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/StorybookPanel.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Story.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/socket/MessageParser.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="28" lean-forward="false" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+          <folding>
+            <element signature="e#53#426#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/GeneralMessage.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="42" lean-forward="false" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
+          <folding>
+            <element signature="e#53#171#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/JacksonMapper.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="32" lean-forward="false" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+          <folding>
+            <element signature="e#46#160#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StoriesArg.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/StateManager.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
@@ -857,27 +823,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/StorybookPanel.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
+    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/StringExt.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/TreeController.kt">
+    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Tree.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-356">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state relative-caret-position="90">
+          <caret line="6" column="41" lean-forward="true" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
           <folding>
-            <element signature="e#51#511#0" expanded="true" />
+            <element signature="e#53#187#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/StorySelectionMessage.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/models/Story.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="60" lean-forward="false" selection-start-line="16" selection-start-column="60" selection-end-line="16" selection-end-column="60" />
+          <folding>
+            <element signature="e#53#327#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/StorybookPanelController.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="79" column="9" lean-forward="true" selection-start-line="79" selection-start-column="9" selection-end-line="79" selection-end-column="9" />
+        <state relative-caret-position="372">
+          <caret line="123" column="36" lean-forward="false" selection-start-line="123" selection-start-column="36" selection-end-line="123" selection-end-column="36" />
           <folding>
             <element signature="e#51#834#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/main/TreeController.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="25" column="45" lean-forward="false" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
+          <folding>
+            <element signature="e#51#502#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/bvic23/intellij/plugin/storybook/settings/SettingsManager.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="25" column="42" lean-forward="false" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
+          <folding>
+            <element signature="e#55#160#0" expanded="true" />
           </folding>
         </state>
       </provider>

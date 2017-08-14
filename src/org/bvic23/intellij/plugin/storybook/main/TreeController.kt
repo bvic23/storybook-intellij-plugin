@@ -1,6 +1,6 @@
 package org.bvic23.intellij.plugin.storybook.main
 
-import org.bvic23.intellij.plugin.storybook.models.StorySelection
+import org.bvic23.intellij.plugin.storybook.models.Story
 import org.bvic23.intellij.plugin.storybook.models.Tree
 import org.bvic23.intellij.plugin.storybook.settings.SettingsManager
 import javax.swing.JTree
@@ -11,7 +11,7 @@ import javax.swing.tree.DefaultTreeModel
 import javax.swing.tree.TreeNode
 import javax.swing.tree.TreePath
 
-class TreeController(private val tree: JTree, private val settingsManager: SettingsManager, private val onSelection: (StorySelection) -> Unit) {
+class TreeController(private val tree: JTree, private val settingsManager: SettingsManager, private val onSelection: (Story) -> Unit) {
     private var collapsedPaths = settingsManager.collapsed
     private var treeModel = DefaultTreeModel(DefaultMutableTreeNode(), false)
 
@@ -23,8 +23,10 @@ class TreeController(private val tree: JTree, private val settingsManager: Setti
             expandAll(tree, TreePath(root))
         }
 
-    var selectedStory = StorySelection("", "")
+    var selectedStory = settingsManager.story
         set(value) {
+            field = value
+            settingsManager.story = value
             val path = value.toPath()
             manualSelect(path)
         }
@@ -47,7 +49,7 @@ class TreeController(private val tree: JTree, private val settingsManager: Setti
             if (path.pathCount < 3) return@addTreeSelectionListener
             val kind = path.getPathComponent(1).toString()
             val story = path.getPathComponent(2).toString()
-            onSelection(StorySelection(kind, story))
+            onSelection(Story(kind, story))
         }
     }
 
@@ -98,5 +100,5 @@ class TreeController(private val tree: JTree, private val settingsManager: Setti
 
 }
 
-private fun StorySelection.toPath() = if (kind == "" || story == "") emptyArray<String>()
+private fun Story.toPath() = if (kind == "" || story == "") emptyArray<String>()
 else arrayOf("Root", kind, story)

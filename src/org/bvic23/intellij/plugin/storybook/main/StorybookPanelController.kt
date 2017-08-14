@@ -24,7 +24,6 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
 
     private var showFailedMessage = false
     private var tree = Tree.empty
-    private var selectedStory = StorySelection("", "")
 
     private val treeController = TreeController(panel.storyTree, settingsManager) { storySelection ->
         setCurrentStory(storySelection)
@@ -75,18 +74,18 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
             stateManager.state = READY
 
             Timer().schedule(timerTask {
-                setCurrentStory(selectedStory, true)
+                setCurrentStory(treeController.selectedStory, true)
             }, 500)
         }
 
         socketClient.on("setCurrentStory") { args ->
-            if (args[0] is StorySelection) {
-                setCurrentStory((args[0] as StorySelection))
+            if (args[0] is Story) {
+                setCurrentStory((args[0] as Story))
             }
             stateManager.state = READY
         }
 
-        socketClient.on("getCurrentStory") { _ -> setCurrentStory(selectedStory) }
+        socketClient.on("getCurrentStory") { _ -> setCurrentStory(treeController.selectedStory) }
 
         socketClient.onOpen {
             notificationManager.info("connected")
@@ -121,9 +120,8 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
         connect()
     }
 
-    private fun setCurrentStory(story: StorySelection, force: Boolean = false) {
-        if (selectedStory == story && !force) return
-        selectedStory = story
+    private fun setCurrentStory(story: Story, force: Boolean = false) {
+        if (treeController.selectedStory == story && !force) return
         treeController.selectedStory = story
         socketClient.send(story.toMessage())
     }

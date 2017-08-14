@@ -1,23 +1,16 @@
 package org.bvic23.intellij.plugin.storybook.models
 
-import org.apache.commons.lang.StringUtils
+import org.bvic23.intellij.plugin.storybook.normalized
 import javax.swing.tree.DefaultMutableTreeNode
 import javax.swing.tree.TreeNode
 
-data class Story(val kind: String, val name: String) {
-    private val normalizedSearchString = (kind + " " + name).normalized
-    private val firstLetters = (kind + " " + name).firstLetters
-    fun similarTo(target: String) = normalizedSearchString.similar(target, 10) || firstLetters.similar(target, 3)
-}
-
 data class Tree(val nodes: List<Story>) {
-
     fun toJTreeModel(): TreeNode {
         val root = DefaultMutableTreeNode("Root")
         val groups = nodes.groupBy { it.kind }
         groups.forEach { key, stories ->
             val node = DefaultMutableTreeNode(key)
-            stories.forEach { node.add(DefaultMutableTreeNode(it.name)) }
+            stories.forEach { node.add(DefaultMutableTreeNode(it.story)) }
             root.add(node)
         }
         return root
@@ -37,27 +30,4 @@ data class Tree(val nodes: List<Story>) {
             return Tree(nodes)
         }
     }
-}
-
-private val String.normalized
-    get() = this.replace(" ", "").toLowerCase()
-
-private val String.firstLetters
-        get() = this.split(" ").flatMap { it.toSnakeCase().split("_") }.filter{ it.isNotBlank() }.map { it.first() }.joinToString("")
-
-private fun String.similar(needle: String, threshold: Int) = this.normalized.contains(needle.normalized, false) || StringUtils.getLevenshteinDistance(this.normalized, needle.normalized) < threshold
-
-private fun String.toSnakeCase(): String {
-    var text: String = ""
-    var isFirst = true
-    this.forEach {
-        if (it.isUpperCase()) {
-            if (isFirst) isFirst = false
-            else text += "_"
-            text += it.toLowerCase()
-        } else {
-            text += it
-        }
-    }
-    return text
 }
