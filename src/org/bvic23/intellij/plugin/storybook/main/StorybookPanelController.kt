@@ -14,6 +14,12 @@ import javax.websocket.CloseReason
 import kotlin.concurrent.timerTask
 import org.bvic23.intellij.plugin.storybook.main.State.*
 import org.bvic23.intellij.plugin.storybook.models.*
+import java.awt.event.KeyEvent
+import java.awt.event.KeyListener
+import sun.jvm.hotspot.HelloWorld.e
+import javafx.scene.input.KeyCode.getKeyCode
+
+
 
 class StorybookPanelController(project: Project) : SettingsChangeNotifier {
     private val panel = StorybookPanel()
@@ -51,6 +57,22 @@ class StorybookPanelController(project: Project) : SettingsChangeNotifier {
         panel.settingsButton.addActionListener {
             ShowSettingsUtil.getInstance().showSettingsDialog(project, "Storybook")
         }
+
+        panel.filterField.addKeyListener(object: KeyListener{
+            override fun keyTyped(e: KeyEvent?) {}
+            override fun keyPressed(e: KeyEvent?) {}
+            override fun keyReleased(e: KeyEvent) {
+                val code = e.keyCode
+                when (code) {
+                    KeyEvent.VK_DOWN -> {
+                        panel.storyTree.requestFocus()
+                    }
+                    KeyEvent.VK_LEFT -> {}
+                    KeyEvent.VK_RIGHT -> {}
+                }
+            }
+
+        })
 
         socketClient.onClose { reason ->
             if (reason.closeCode == CloseReason.CloseCodes.CLOSED_ABNORMALLY) {
