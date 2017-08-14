@@ -1,4 +1,4 @@
-package org.bvic23.intellij.plugin.storybook
+package org.bvic23.intellij.plugin.storybook.notifications
 
 import com.intellij.notification.Notification
 import com.intellij.notification.NotificationType

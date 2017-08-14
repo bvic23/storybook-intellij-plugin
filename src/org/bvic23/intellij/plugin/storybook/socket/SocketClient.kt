@@ -1,6 +1,7 @@
 package org.bvic23.intellij.plugin.storybook.socket
 
-import org.bvic23.intellij.plugin.storybook.MessageParser
+import org.bvic23.intellij.plugin.storybook.models.GeneralMessage
+import org.bvic23.intellij.plugin.storybook.notifications.NotificationManager
 import org.glassfish.tyrus.client.ClientManager
 import java.net.URI
 import javax.websocket.*
@@ -10,7 +11,7 @@ typealias CloseHandler = (CloseReason) -> Unit
 typealias OpenHandler = () -> Unit
 typealias OnHandler<T> = (List<T>) -> Unit
 
-class SocketClient {
+class SocketClient(notificationManager: NotificationManager) {
     private val endpointConfig = ClientEndpointConfig.Builder.create().build()!!
     private val client = ClientManager.createClient()!!
     private var errorHandler: ErrorHandler = {}
@@ -18,7 +19,7 @@ class SocketClient {
     private var openHandler: OpenHandler = {}
     private var session: Session? = null
     private val handlers = mutableMapOf<String, OnHandler<Any>>()
-    private val messageParser = MessageParser()
+    private val messageParser = MessageParser(notificationManager)
 
     fun connect(host: String, port: String) {
         val uriString = "ws://$host:$port/"
@@ -31,13 +32,12 @@ class SocketClient {
                 session = newSession
 
                 session?.addMessageHandler(MessageHandler.Whole<String> { json ->
-                    val message = messageParser.parseGeneralMessage(json)
-                    message?.let {
+                    val message = messageParser.parse(json)
+                    if (message != null) {
                         val handler = handlers[message.type]
                         handler?.invoke(message.args)
                     }
-                }
-                )
+                })
                 openHandler()
             }
 
@@ -60,5 +60,6 @@ class SocketClient {
 
     fun on(type: String, handler: OnHandler<Any>) = handlers.set(type, handler)
 
-    fun sendText(msg: String) = session?.basicRemote?.sendText(msg)
+    fun send(msg: String) = session?.basicRemote?.sendText(msg)
+    fun send(message: GeneralMessage<Any>) = session?.basicRemote?.sendText(message.toMessage())
 }

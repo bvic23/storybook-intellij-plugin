@@ -1,29 +1,33 @@
 package org.bvic23.intellij.plugin.storybook.models
 
+import org.bvic23.intellij.plugin.storybook.normalized
 import javax.swing.tree.DefaultMutableTreeNode
-import javax.swing.tree.DefaultTreeModel
-import javax.swing.tree.TreeModel
+import javax.swing.tree.TreeNode
 
-data class Tree(val kinds: List<Kind>) {
-    fun toJTreeModel(): TreeModel {
+data class Tree(val nodes: List<Story>) {
+    fun toJTreeModel(): TreeNode {
         val root = DefaultMutableTreeNode("Root")
-        kinds.map{ mapKind(it) }.forEach { root.add(it) }
-        return DefaultTreeModel(root)
-    }
-
-    private fun mapKind(kind: Kind): DefaultMutableTreeNode {
-        val result = DefaultMutableTreeNode(kind.kind)
-        kind.stories.map { DefaultMutableTreeNode(it) }.forEach { result.add(it) }
-        return result
-    }
-
-    fun filteredTree(filterString: String) = Tree(
-        this.kinds.map {
-            Kind(it.kind, filterStories(it.stories, filterString))
-        }.filter{
-            it.stories.isNotEmpty()
+        val groups = nodes.groupBy { it.kind }
+        groups.forEach { key, stories ->
+            val node = DefaultMutableTreeNode(key)
+            stories.forEach { node.add(DefaultMutableTreeNode(it.story)) }
+            root.add(node)
         }
-    )
+        return root
+    }
 
-    private fun filterStories(stories: List<String>, filterString: String) = stories.filter { it.contains(filterString, true) }
+    fun filteredTree(filterString: String): Tree {
+        val fs = filterString.normalized
+        val matchingNodes = nodes.filter { it.similarTo(fs) }
+        return Tree(matchingNodes)
+    }
+
+    companion object {
+        val empty = Tree(emptyList())
+
+        fun fromKinds(kinds: List<Kind>): Tree {
+            val nodes = kinds.flatMap { (kind, stories) -> stories.map {story -> Story(kind, story) }}
+            return Tree(nodes)
+        }
+    }
 }

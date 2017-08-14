@@ -1,4 +1,4 @@
-package org.bvic23.intellij.plugin.storybook;
+package org.bvic23.intellij.plugin.storybook.main;
 
 import javax.swing.*;
 

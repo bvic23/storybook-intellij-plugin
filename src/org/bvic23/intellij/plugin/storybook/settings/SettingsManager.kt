@@ -1,22 +1,29 @@
 package org.bvic23.intellij.plugin.storybook.settings
 
 import com.intellij.ide.util.PropertiesComponent
+import org.bvic23.intellij.plugin.storybook.models.Story
+
 fun String.removePrefix(prefix: String) = this.replace(prefix, "")
 
-class SettingsManager {
+class SettingsManager(val projectName: String) {
     private val COLLAPSED_SEPARATOR = "#"
 
     private val DEFAULT_HOST = "localhost"
     private val DEFAULT_PORT = "7007"
 
-    private val FILTER_KEY = "FILTER_KEY"
-    private val COLLAPSED_KEY = "COLLAPSED_KEY"
-    private val HOST_KEY = "HOST_KEY"
-    private val PORT_KEY = "PORT_KEY"
+    private val FILTER_KEY = "FILTER_KEY$projectName"
+    private val COLLAPSED_KEY = "COLLAPSED_KEY$projectName"
+    private val HOST_KEY = "HOST_KEY$projectName"
+    private val PORT_KEY = "PORT_KEY$projectName"
+    private val SELECTED_KEY = "SELECTED_KEY$projectName"
 
     var filter
         get() = getValue(FILTER_KEY) ?: ""
         set(value) = setValue(FILTER_KEY, value)
+
+    var story: Story
+        get() = Story.fromJSON(getValue(SELECTED_KEY)) ?: Story("", "")
+        set(value) = setValue(SELECTED_KEY, value.toJSON())
 
     var collapsed: Set<String>
         get() {
