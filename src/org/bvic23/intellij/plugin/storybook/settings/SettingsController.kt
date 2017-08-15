@@ -55,8 +55,8 @@ class SettingsController : Configurable {
     }
 
     private fun notifySettingsChanged() {
-        val notifier = messageBus?.syncPublisher(SettingsChangeNotifier.SETTINGS_CHANGE_TOPIC)
-        notifier?.onSettingsChange()
+        val notifier = messageBus.syncPublisher(SettingsChangeNotifier.SETTINGS_CHANGE_TOPIC)
+        notifier.onSettingsChange()
     }
 
     private fun getHost() = panel.hostField.text.trim()

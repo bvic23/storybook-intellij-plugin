@@ -61,7 +61,7 @@ class TreeController(private val tree: JTree, private val settingsManager: Setti
                 val code = e.keyCode
                 when (code) {
                     KeyEvent.VK_ENTER -> {
-                        openSelectedStoryFile()
+                        openSelectedStoryFileOrComponent()
                     }
                     KeyEvent.VK_LEFT -> {}
                     KeyEvent.VK_RIGHT -> {}
@@ -73,14 +73,19 @@ class TreeController(private val tree: JTree, private val settingsManager: Setti
                 if (e.clickCount == 1) {
                     return super.mousePressed(e)
                 }
-                openSelectedStoryFile()
+                openSelectedStoryFileOrComponent()
             }
         })
     }
 
-    private fun openSelectedStoryFile() {
-        val story = storyFromPath(tree.selectionPath)
-        fileLocator.openFileForStory(story)
+    private fun openSelectedStoryFileOrComponent() {
+        if (tree.selectionPath.pathCount == 3) {
+            val story = storyFromPath(tree.selectionPath)
+            fileLocator.openFileForStory(story)
+        } else {
+            val componentName = tree.selectionPath.lastPathComponent.toString()
+            fileLocator.openFileForComponent(componentName)
+        }
     }
 
     private fun storyFromPath(path: TreePath): Story {
