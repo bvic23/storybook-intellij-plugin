@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="org.jetbrains.kotlin:kotlin-reflect:1.1.4" type="repository">
+    <properties maven-id="org.jetbrains.kotlin:kotlin-reflect:1.1.4" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-reflect/1.1.4/kotlin-reflect-1.1.4.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib/1.1.4/kotlin-stdlib-1.1.4.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/annotations/13.0/annotations-13.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
