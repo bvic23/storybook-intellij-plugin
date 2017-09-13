@@ -59,7 +59,7 @@ class FileLocator(private val project: Project) {
     private fun openAndVerify(file: VirtualFile, componentName: String): Boolean {
         val content = LoadTextUtil.loadText(file).toString()
 
-        val kindOffset = content.indexOf("export default $componentName")
+        val kindOffset = content.indexOf("export default $componentName;")
         if (kindOffset == -1) return false
 
         componentCache[componentName] = file
