@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="com.fasterxml.jackson.module:jackson-module-kotlin:2.9.1" type="repository">
+    <properties maven-id="com.fasterxml.jackson.module:jackson-module-kotlin:2.9.1" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/module/jackson-module-kotlin/2.9.1/jackson-module-kotlin-2.9.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.9.1/jackson-databind-2.9.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.9.1/jackson-core-2.9.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

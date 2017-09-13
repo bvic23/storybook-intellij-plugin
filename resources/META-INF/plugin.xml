@@ -2,11 +2,11 @@
   <id>oorg.bvic23.intellij.plugin.storybook.Storybook</id>
   <name>Storybook</name>
   <description>This plugin supports Storybook based development in React (Native).</description>
-  <version>1.0.6</version>
+  <version>1.0.7</version>
   <vendor email="bvic23@gmail.com" url="http://twitter.com/bvic23">Viktor Belenyesi</vendor>
 
   <change-notes><![CDATA[
-     - Fix kotlin incompatibility<br>
+     - Small bugfixes<br>
     ]]>
   </change-notes>
 
